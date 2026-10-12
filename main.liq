@@ -32,6 +32,9 @@ fallback_file = environment.get(default="", "FALLBACK_FILE")
 # Optional: set LOG_LEVEL=5 to debug request problems.
 log_level = int_of_string(environment.get(default="3", "LOG_LEVEL"))
 
+# StreamTitle sent to Icecast while a jingle is playing.
+jingle_title = "--jingle--"
+
 s3_enabled = s3_bucket != ""
 
 settings.log.level := log_level
@@ -62,7 +65,7 @@ assert(
 
 def apply_metadata(m) =
   if m["radio_jingle"] == "true" then
-    [("song", "Jingle"), ("radio_jingle", "true")]
+    [("song", jingle_title), ("radio_jingle", "true")]
   else
     artist = m["artist"]
     title = m["title"]
@@ -253,7 +256,7 @@ end
 def push_icy_metadata(m) =
   fields =
     if m["radio_jingle"] == "true" then
-      [("song", "Jingle"), ("url", " ")]
+      [("song", jingle_title), ("url", " ")]
     else
       cover = discogs_cover(m["artist"], m["title"])
 
@@ -376,6 +379,8 @@ end
 #  - no max_fail
 #  - mode="randomize" (shuffle once per pass) instead of
 #    "random" (independent random pick every time)
+#  - jingles use insert_missing=true so a jingle without tags
+#    still gets radio_jingle=true
 # ===========================================================
 
 rotation =
@@ -403,6 +408,7 @@ rotation =
 
     jingles =
       metadata.map(
+        insert_missing=true,
         update=false,
         fun(m) ->
           list.append(
