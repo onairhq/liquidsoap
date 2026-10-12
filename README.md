@@ -2,6 +2,11 @@
 
 A Docker image for [Liquidsoap](https://www.liquidsoap.info/), built on top of the official `savonet/liquidsoap` image. It runs a ready-to-use radio automation pipeline that streams to [Icecast](https://icecast.org/), with jingle rotation, silence detection, audio normalization, cover art lookup via Discogs, and optional S3-backed playlists.
 
+## Documentations
+
+[onairhq/icecast2](https://github.com/onairhq/icecast2)
+[onairhq/web](https://github.com/onairhq/web)
+
 ## Features
 
 - Streams MP3 to Icecast through `output.icecast`
