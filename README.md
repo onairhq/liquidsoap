@@ -4,8 +4,8 @@ A Docker image for [Liquidsoap](https://www.liquidsoap.info/), built on top of t
 
 ## Documentations
 
-[onairhq/icecast2](https://github.com/onairhq/icecast2)
-[onairhq/web](https://github.com/onairhq/web)
+- [onairhq/icecast2](https://github.com/onairhq/icecast2)
+- [onairhq/web](https://github.com/onairhq/web)
 
 ## Features
 
